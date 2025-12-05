@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神经网络梯度下降可视化</title>
+    <!-- 尝试使用 unpkg 源，通常比较稳定 -->
+    <script src="https://unpkg.com/plotly.js-dist-min@2.27.1/plotly.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="plot"></div>
+        <div id="controls">
+            <h2>梯度下降控制台</h2>
+            
+            <div class="control-group">
+                <label for="functionSelect">损失函数 (Loss Landscape)</label>
+                <select id="functionSelect">
+                    <option value="rugged">崎岖凸函数 (Rugged Convex)</option>
+                    <option value="ackley">复杂非凸函数 (Non-Convex/Neural Net)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="lr">学习率 (Learning Rate): <span id="lrValue">0.01</span></label>
+                <input type="range" id="lr" min="0.001" max="0.2" step="0.001" value="0.01">
+            </div>
+
+            <div class="control-group">
+                <button id="startBtn">开始下降 (Start)</button>
+                <button id="resetBtn">重置位置 (Reset)</button>
+            </div>
+
+            <div class="status">
+                <h3>当前状态</h3>
+                <p>权重 w1 (x): <span id="w1">0.00</span></p>
+                <p>权重 w2 (y): <span id="w2">0.00</span></p>
+                <p>损失 Loss (z): <span id="loss">0.00</span></p>
+                <p>迭代次数: <span id="iter">0</span></p>
+            </div>
+            
+            <div class="info">
+                <p><small>提示: 红色点代表当前的权重位置。观察它如何沿着曲面滚落到最低点。</small></p>
+            </div>
+
+            <div id="model-viz" style="width: 100%; height: 250px; margin-top: 20px; border-top: 1px solid #ddd;"></div>
+            <div id="loss-viz" style="width: 100%; height: 200px; margin-top: 20px; border-top: 1px solid #ddd;"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
